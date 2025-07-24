@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Search Books - Library Management{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="card p-8 mb-8">
+        <div class="text-center mb-8">
+            <i class="fas fa-search text-4xl text-purple-600 mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800">Search Books</h2>
+            <p class="text-gray-600 mt-2">Find books in our library collection</p>
+        </div>
+
+        <form method="POST" class="max-w-md mx-auto">
+            <div class="flex gap-2">
+                <input type="text" name="keyword" required 
+                       class="form-input flex-1" placeholder="Enter book name or keyword">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search mr-2"></i>Search
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% if books is not none %}
+    <div class="card p-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-6">
+            <i class="fas fa-list mr-2"></i>Search Results
+        </h3>
+
+        {% if books %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b border-gray-200">
+                        <th class="pb-3 text-gray-600 font-medium">Book Name</th>
+                        <th class="pb-3 text-gray-600 font-medium">Book ID</th>
+                        <th class="pb-3 text-gray-600 font-medium">Author</th>
+                        <th class="pb-3 text-gray-600 font-medium">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-4 font-medium text-gray-900">{{ book[0] }}</td>
+                        <td class="py-4 text-gray-600">{{ book[1] }}</td>
+                        <td class="py-4 text-gray-600">{{ book[2] }}</td>
+                        <td class="py-4">
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm hover:bg-blue-200">
+                                    <i class="fas fa-hand-holding mr-1"></i>Issue
+                                </button>
+                                <button class="px-3 py-1 bg-green-100 text-green-700 rounded text-sm hover:bg-green-200">
+                                    <i class="fas fa-eye mr-1"></i>Details
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-6 text-center">
+            <p class="text-gray-600">Found {{ books|length }} book(s) matching your search</p>
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+            <i class="fas fa-book-open text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">No books found</h3>
+            <p class="text-gray-500">Try searching with different keywords</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-8">
+        <a href="/dashboard" class="text-blue-600 hover:text-blue-800">
+            <i class="fas fa-arrow-left mr-1"></i>Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

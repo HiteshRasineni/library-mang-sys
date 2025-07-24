@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Library Management{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">
+        <i class="fas fa-tachometer-alt mr-3"></i>Library Dashboard
+    </h1>
+    <p class="text-gray-600">Manage your library operations efficiently</p>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Book Management -->
+    <div class="card p-6">
+        <div class="flex items-center mb-4">
+            <div class="p-3 bg-blue-100 rounded-lg">
+                <i class="fas fa-book text-blue-600 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold ml-3 text-gray-800">Book Operations</h3>
+        </div>
+        <div class="space-y-3">
+            <a href="/addbook" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-plus text-green-600 mr-2"></i>Add New Book
+            </a>
+            <a href="/displaybooks" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-list text-blue-600 mr-2"></i>View All Books
+            </a>
+            <a href="/searchbook" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-search text-purple-600 mr-2"></i>Search Books
+            </a>
+            <a href="/deletebook" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-trash text-red-600 mr-2"></i>Delete Book
+            </a>
+        </div>
+    </div>
+
+    <!-- Student Operations -->
+    <div class="card p-6">
+        <div class="flex items-center mb-4">
+            <div class="p-3 bg-green-100 rounded-lg">
+                <i class="fas fa-users text-green-600 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold ml-3 text-gray-800">Student Management</h3>
+        </div>
+        <div class="space-y-3">
+            <a href="/signup" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-user-plus text-green-600 mr-2"></i>Register Student
+            </a>
+            <a href="/students" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-users text-blue-600 mr-2"></i>View All Students
+            </a>
+            <a href="/studentbooks" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-book-reader text-purple-600 mr-2"></i>Student's Books
+            </a>
+            <a href="/finepayment" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-money-bill text-orange-600 mr-2"></i>Fine Payment
+            </a>
+        </div>
+    </div>
+
+    <!-- Transaction Management -->
+    <div class="card p-6">
+        <div class="flex items-center mb-4">
+            <div class="p-3 bg-purple-100 rounded-lg">
+                <i class="fas fa-exchange-alt text-purple-600 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold ml-3 text-gray-800">Transactions</h3>
+        </div>
+        <div class="space-y-3">
+            <a href="/issuebook" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-hand-holding text-green-600 mr-2"></i>Issue Book
+            </a>
+            <a href="/submitbook" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-undo text-blue-600 mr-2"></i>Return Book
+            </a>
+            <a href="/issuedbooks" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-list-alt text-purple-600 mr-2"></i>Issued Books
+            </a>
+            <a href="/pendingbooks" class="block w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-clock text-orange-600 mr-2"></i>Pending Returns
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="grid md:grid-cols-4 gap-6">
+    <div class="card p-6 text-center">
+        <i class="fas fa-book text-3xl text-blue-600 mb-2"></i>
+        <h4 class="text-lg font-semibold text-gray-800">Total Books</h4>
+        <p class="text-2xl font-bold text-blue-600">---</p>
+    </div>
+    <div class="card p-6 text-center">
+        <i class="fas fa-users text-3xl text-green-600 mb-2"></i>
+        <h4 class="text-lg font-semibold text-gray-800">Registered Students</h4>
+        <p class="text-2xl font-bold text-green-600">---</p>
+    </div>
+    <div class="card p-6 text-center">
+        <i class="fas fa-hand-holding text-3xl text-purple-600 mb-2"></i>
+        <h4 class="text-lg font-semibold text-gray-800">Books Issued</h4>
+        <p class="text-2xl font-bold text-purple-600">---</p>
+    </div>
+    <div class="card p-6 text-center">
+        <i class="fas fa-clock text-3xl text-orange-600 mb-2"></i>
+        <h4 class="text-lg font-semibold text-gray-800">Pending Returns</h4>
+        <p class="text-2xl font-bold text-orange-600">---</p>
+    </div>
+</div>
+{% endblock %} 

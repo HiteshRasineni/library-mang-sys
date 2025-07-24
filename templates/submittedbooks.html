@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Returned Books - Library Management{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+            <i class="fas fa-undo mr-3"></i>Returned Books
+        </h1>
+        <p class="text-gray-600">History of books returned to the library</p>
+    </div>
+
+    <div class="card p-8">
+        {% if books %}
+        <div class="mb-6 flex justify-between items-center">
+            <h2 class="text-xl font-bold text-gray-800">
+                <i class="fas fa-list mr-2"></i>Return History
+            </h2>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                {{ books|length }} books returned
+            </span>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b border-gray-200">
+                        <th class="pb-3 text-gray-600 font-medium">Student Name</th>
+                        <th class="pb-3 text-gray-600 font-medium">Admin Number</th>
+                        <th class="pb-3 text-gray-600 font-medium">Book ID</th>
+                        <th class="pb-3 text-gray-600 font-medium">Return Date</th>
+                        <th class="pb-3 text-gray-600 font-medium">Status</th>
+                        <th class="pb-3 text-gray-600 font-medium">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-4">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-green-600 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900">{{ book[0] }}</span>
+                            </div>
+                        </td>
+                        <td class="py-4 text-gray-600">{{ book[1] }}</td>
+                        <td class="py-4 text-gray-600 font-mono">{{ book[2] }}</td>
+                        <td class="py-4 text-gray-600">{{ book[3] }}</td>
+                        <td class="py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                                <i class="fas fa-check-circle mr-1"></i>Returned
+                            </span>
+                        </td>
+                        <td class="py-4">
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm hover:bg-blue-200">
+                                    <i class="fas fa-eye mr-1"></i>Details
+                                </button>
+                                <button class="px-3 py-1 bg-purple-100 text-purple-700 rounded text-sm hover:bg-purple-200">
+                                    <i class="fas fa-print mr-1"></i>Receipt
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="mt-8 grid md:grid-cols-4 gap-6">
+            <div class="p-4 bg-green-50 rounded-lg text-center">
+                <i class="fas fa-undo text-2xl text-green-600 mb-2"></i>
+                <h3 class="font-semibold text-green-900">Total Returns</h3>
+                <p class="text-2xl font-bold text-green-600">{{ books|length }}</p>
+            </div>
+            <div class="p-4 bg-blue-50 rounded-lg text-center">
+                <i class="fas fa-calendar-day text-2xl text-blue-600 mb-2"></i>
+                <h3 class="font-semibold text-blue-900">Today</h3>
+                <p class="text-2xl font-bold text-blue-600">---</p>
+            </div>
+            <div class="p-4 bg-purple-50 rounded-lg text-center">
+                <i class="fas fa-calendar-week text-2xl text-purple-600 mb-2"></i>
+                <h3 class="font-semibold text-purple-900">This Week</h3>
+                <p class="text-2xl font-bold text-purple-600">---</p>
+            </div>
+            <div class="p-4 bg-orange-50 rounded-lg text-center">
+                <i class="fas fa-clock text-2xl text-orange-600 mb-2"></i>
+                <h3 class="font-semibold text-orange-900">On Time</h3>
+                <p class="text-2xl font-bold text-orange-600">---</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mt-8 p-6 bg-gray-50 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">
+                <i class="fas fa-lightning-bolt mr-2"></i>Quick Actions
+            </h3>
+            <div class="flex gap-4 justify-center">
+                <a href="/submitbook" class="btn bg-green-600 text-white hover:bg-green-700">
+                    <i class="fas fa-undo mr-2"></i>Return Another Book
+                </a>
+                <a href="/issuedbooks" class="btn bg-blue-600 text-white hover:bg-blue-700">
+                    <i class="fas fa-hand-holding mr-2"></i>View Issued Books
+                </a>
+                <a href="/pendingbooks" class="btn bg-orange-600 text-white hover:bg-orange-700">
+                    <i class="fas fa-clock mr-2"></i>Pending Returns
+                </a>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="text-center py-12">
+            <i class="fas fa-undo text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">No books returned yet</h3>
+            <p class="text-gray-500 mb-6">Return history will appear here once books are submitted</p>
+            <div class="flex gap-4 justify-center">
+                <a href="/submitbook" class="btn btn-primary">
+                    <i class="fas fa-undo mr-2"></i>Return a Book
+                </a>
+                <a href="/issuedbooks" class="btn bg-gray-300 text-gray-700 hover:bg-gray-400">
+                    <i class="fas fa-hand-holding mr-2"></i>View Issued Books
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="text-center mt-8">
+        <a href="/dashboard" class="text-blue-600 hover:text-blue-800">
+            <i class="fas fa-arrow-left mr-1"></i>Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
