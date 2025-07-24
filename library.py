@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from db_config import get_db_connection
 from datetime import date, timedelta
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
+
 
 # Home Page
 @app.route('/')
